@@ -1,6 +1,9 @@
 # 펫 한마리를 표현하는 클래스
 
 import random
+# from config import START_HUNGER, START_ENERGY, START_HAPPY
+import config
+
 
 class Pet:
     #클래스 변수
@@ -8,9 +11,9 @@ class Pet:
 
     def __init__(self, name):
         self.name = name    # 이름
-        self.hunger = 30    # 배고픔 (0 ~ 100)
-        self.happy = 70     # 행복도 (0 ~ 100)
-        self.energy = 70    # 에너지 (0 ~ 100)
+        self.hunger = config.START_HUNGER    # 배고픔 (0 ~ 100)
+        self.happy = config.START_HAPPY     # 행복도 (0 ~ 100)
+        self.energy = config.START_ENERGY    # 에너지 (0 ~ 100)
         self.alive = True
         Pet.count += 1
 
@@ -80,16 +83,20 @@ class Pet:
 
 
 # ------ 테스트 코드 -------
-choco = Pet("초코")
-dubu = Pet("두부")
+# pet.py를 직접 실행했을 때 uv run pet.py만 실행된다. 다른 모듈에서 import 됐을때는 실행되지 않는다.
+if __name__ == "__main__":
+    choco = Pet("초코")
+    dubu = Pet("두부")
 
-print("입양한 펫 수:", Pet.count)
+    print("입양한 펫 수:", Pet.count)
 
-day = 1
+    day = 1
 
-while choco.alive:
-    choco.pass_time()
-    print(f"{day}일차 : 배고픔 {choco.hunger}, 행복도 {choco.happy}")
-    day += 1
+    while choco.alive:
+        choco.pass_time()
+        print(f"{day}일차 : 배고픔 {choco.hunger}, 행복도 {choco.happy}")
+        day += 1
 
-print(choco)
+    print(choco)
+
+    print("pet.py 의 __name__:", __name__)
